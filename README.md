@@ -125,6 +125,74 @@ curl -X GET "localhost:9200/my_index/_search?pretty" -H 'Content-Type: applicati
 
 This query counts the number of occurrences of each user.
 
+To run a query using tools or browser extensions. Here's how:
+
+### 1. **Using Kibana Dev Tools**
+   If you're using Kibana, which is part of the Elastic Stack, you can run this query directly in Kibana's **Dev Tools**:
+
+   - **Install and Access Kibana**: If Kibana is installed and running, navigate to `http://localhost:5601` in your browser.
+   - **Go to Dev Tools**: In Kibana, go to the **Dev Tools** section from the side menu.
+   - **Execute the Query**:
+     - In the console, enter the following:
+       ```json
+       GET /_search
+       {
+         "query": {
+           "fuzzy": {
+             "user.id": {
+               "value": "ki"
+             }
+           }
+         }
+       }
+       ```
+     - Press the "Play" button or `Ctrl + Enter` to execute the query. The results will be shown in the console.
+
+### 2. **Using a REST Client Browser Extension**
+   If you're not using Kibana, you can use a REST client browser extension like **Postman**, **Insomnia**, or **Rested**:
+
+   - **Install a REST Client Extension**:
+     - For Chrome: Install [Postman](https://www.postman.com/downloads/) or [Rested](https://chrome.google.com/webstore/detail/rested/fhjbnmmenlmhildodkdcbkaidanjkjin) from the Chrome Web Store.
+     - For Firefox: Install [RESTED](https://addons.mozilla.org/en-US/firefox/addon/rested/) or [RESTClient](https://addons.mozilla.org/en-US/firefox/addon/restclient/).
+
+   - **Set Up the Request**:
+     - **Method**: Set the HTTP method to `GET`.
+     - **URL**: Enter the URL `http://localhost:9200/_search?pretty`.
+     - **Headers**: Set the `Content-Type` header to `application/json`.
+     - **Body**: In the body section, enter the JSON query:
+       ```json
+       {
+         "query": {
+           "fuzzy": {
+             "user.id": {
+               "value": "ki"
+             }
+           }
+         }
+       }
+       ```
+
+   - **Send the Request**: Click the "Send" button, and the response from Elasticsearch will be displayed in the response section.
+
+### 3. **Using cURL in the Terminal**
+
+   While not in a browser, you can use the command you provided directly in the terminal, which is often more straightforward:
+   ```bash
+   curl -X GET "localhost:9200/_search?pretty" -H 'Content-Type: application/json' -d'
+   {
+     "query": {
+       "fuzzy": {
+         "user.id": {
+           "value": "ki"
+         }
+       }
+     }
+   }
+   '
+   ```
+
+This method will return the response in the terminal, formatted according to the `pretty` parameter.
+
 ### 8. **Monitoring and Managing Elasticsearch**
 
 - **Kibana**: For visualizing Elasticsearch data.
